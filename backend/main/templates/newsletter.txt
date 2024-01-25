@@ -1,0 +1,6 @@
+¡Hola {{usuario.nombre}}!
+
+{% for productoname in productos%}
+    {{productoname}}
+
+{% endfor %}
