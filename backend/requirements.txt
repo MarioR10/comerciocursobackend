@@ -1,9 +1,10 @@
-flask==3.0.0
+flask==3.0.1
 python-dotenv
 flask-restful
-flask_sqlalchemy==2.5.1
+flask_sqlalchemy==3.1.1
 flask-jwt-extended
 flask-mail
 flask-cors
 flask-login
-SQLAlchemy==1.4.23
+SQLAlchemy==2.0.25
+marshmallow
