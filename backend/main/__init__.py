@@ -30,7 +30,7 @@ mailsender= Mail()
 
 def createApp():
 
-    app= Flask(__name__)
+    app= Flask(__name__)  
 
 #cargar variables de entorno
     load_dotenv()
@@ -41,17 +41,18 @@ def createApp():
     DB_NAME= os.getenv("DATABASE_NAME")
     if not os.path.exists(f'{PATH}{DB_NAME}'):
         os.chdir(f'{PATH}')
-        file=os.open(f'{DB_NAME}',os.O_CREAT)
+        file=os.open(f'{DB_NAME}',os.O_CREAT).close()
+        
 ##TERMINA AQUI
         
-    #CONECTARSE A LA BASE DE DATOS
-        
+    #CONECTARSE A LA BASE DE DATOS  
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
     app.config['SQLALCHEMY_DATABASE_URI']= f'sqlite:///{PATH}{DB_NAME}'
     db.init_app(app)
 
 
     import main.resources as resources
+    import main.controllers as controllers
     api.add_resource(resources.ClientesResource, '/clientes')
     api.add_resource(resources.ClienteResource, '/cliente/<id>')
     api.add_resource(resources.UsuariosResource, '/Usuarios')
@@ -62,6 +63,8 @@ def createApp():
     api.add_resource(resources.ProductoResource,'/producto/<id>')
     api.add_resource(resources.ProductosComprasResource,'/produtos-compras')
     api.add_resource(resources.ProductoCompraResource,'/produto-compra/<id>')
+    api.add_resource(controllers.CompraControllers, '/compra-controller/<id>')
+    api.add_resource(controllers.ComprasControllers, '/compras-controller')
     
     
     
